@@ -4,8 +4,7 @@ import { useState } from "react";
 
 const Wrapper = styled(motion.div)`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100vw;
   height: 100vh;
@@ -14,6 +13,8 @@ const Wrapper = styled(motion.div)`
 
 const Box = styled(motion.div)`
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 200px;
   height: 200px;
   font-size: 28px;
@@ -26,22 +27,24 @@ const Cirlce = styled(motion.div)`
   background-color: #00a5ff;
   width: 50px;
   height: 50px;
-  border-radius: 50px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 
 function App() {
-  const [click, setClick] = useState(false);
+  const [clicked, setClick] = useState(false);
   const toggleClicked = () => setClick((prev) => !prev);
 
   return (
     <Wrapper onClick={toggleClicked}>
-      <Box
-        style={{
-          justifyContent: click ? "center" : "flex-start",
-          alignItems: click ? "center" : "flex-start",
-        }}>
-        <Cirlce layout />
+      <Box>
+        {!clicked ? (
+          <Cirlce layoutId="circle" style={{ borderRadius: 50 }} />
+        ) : null}
+      </Box>
+      <Box>
+        {clicked ? (
+          <Cirlce layoutId="circle" style={{ borderRadius: 0, scale: 2 }} />
+        ) : null}
       </Box>
     </Wrapper>
   );
